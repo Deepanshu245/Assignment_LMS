@@ -1,0 +1,135 @@
+/* styles.css */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: url('images/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #333;
+}
+
+.container {
+    width: %;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 50px;
+    text-align: center;
+}
+
+h1, h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+form, #user-form, #logged-in-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+input[type="text"], input[type="date"] {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+button {
+    padding: 5px 10px;
+    background: #4A90E2;
+    color: #fff;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s;
+    display: flex;
+    align-items: center;
+}
+
+button:hover {
+    background: #357ABD;
+}
+
+button i {
+    margin-right: 5px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background: #E4F1FE;
+}
+
+tr:nth-child(even) {
+    background: #F7F9FC;
+}
+
+.delete, .renew {
+    color: #4A90E2;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+i {
+    margin-right: 5px;
+}
+
+#welcome-message {
+    font-size: 18px;
+    color: #333;
+    margin-right: 10px;
+}
+
+#user-logs {
+    margin-top: 30px;
+    text-align: left;
+}
+
+.user-books {
+    margin-bottom: 20px;
+}
+
+.user-books h3 {
+    font-size: 20px; /* Reduced font size for usernames */
+    color: #5a6439;
+    margin-bottom: 10px;
+}
+
+.user-books ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.user-books ul li {
+    background: #F7F9FC;
+    margin-bottom: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
