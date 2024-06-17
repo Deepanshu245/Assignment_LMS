@@ -5,7 +5,11 @@ document.getElementById('book-list').addEventListener('click', handleBookActions
 document.getElementById('clear-history').addEventListener('click', clearHistory);
 
 let currentUser = null;
-const users = {};
+const users = JSON.parse(localStorage.getItem('users')) || {};
+
+function saveUsersToLocalStorage() {
+    localStorage.setItem('users', JSON.stringify(users));
+}
 
 function loginUser() {
     const username = document.getElementById('username').value;
@@ -21,7 +25,6 @@ function loginUser() {
 
     document.getElementById('user-form').style.display = 'none';
     document.getElementById('user-logs').style.display = 'none';
-    // In your scripts.js, after the user logs in successfully
     document.getElementById('logged-in-form').style.display = 'block';
     document.getElementById('table-header').style.display = 'table-header-group';
     document.getElementById('welcome-message').textContent = `Welcome, ${username}`;
@@ -34,7 +37,6 @@ function logoutUser() {
     currentUser = null;
     document.getElementById('user-form').style.display = 'flex';
     document.getElementById('user-logs').style.display = 'block';   
-        // When the user logs out
     document.getElementById('logged-in-form').style.display = 'none';
     document.getElementById('table-header').style.display = 'none';
 
@@ -48,11 +50,10 @@ function addBook(e) {
     e.preventDefault();
 
     const title = document.getElementById('title').value;
-    const author = document.getElementById('author').value;
     const issueDate = document.getElementById('issue-date').value;
     const returnDate = document.getElementById('return-date').value;
 
-    if (!title || !author || !issueDate || !returnDate) {
+    if (!title || !issueDate || !returnDate) {
         alert('Please fill in all fields');
         return;
     }
@@ -61,19 +62,18 @@ function addBook(e) {
 
     const book = {
         title,
-        author,
         issueDate,
         returnDate,
         daysRemaining
     };
 
     users[currentUser].push(book);
+    saveUsersToLocalStorage();
 
     displayBooks();
     displayUserLogs();
 
     document.getElementById('title').value = '';
-    document.getElementById('author').value = '';
     document.getElementById('issue-date').value = '';
     document.getElementById('return-date').value = '';
 }
@@ -86,6 +86,7 @@ function handleBookActions(e) {
             const row = e.target.parentElement.parentElement.parentElement;
             const title = row.children[0].textContent;
             users[currentUser] = users[currentUser].filter(book => book.title !== title);
+            saveUsersToLocalStorage();
             displayBooks();
             displayUserLogs();
         }
@@ -100,6 +101,7 @@ function handleBookActions(e) {
         if (newReturnDate) {
             book.returnDate = newReturnDate;
             book.daysRemaining = calculateDaysRemaining(newReturnDate);
+            saveUsersToLocalStorage();
             displayBooks();
             displayUserLogs();
         }
@@ -122,7 +124,6 @@ function displayBooks() {
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${book.title}</td>
-            <td>${book.author}</td>
             <td>${book.issueDate}</td>
             <td>${book.returnDate}</td>
             <td class="days-remaining">${book.daysRemaining}</td>
@@ -150,7 +151,7 @@ function displayUserLogs() {
         const bookList = document.createElement('ul');
         users[username].forEach(book => {
             const listItem = document.createElement('li');
-            listItem.textContent = `${book.title} by ${book.author} (Issue Date: ${book.issueDate}, Return Date: ${book.returnDate}, Days Remaining: ${book.daysRemaining})`;
+            listItem.textContent = `${book.title} (Issue Date: ${book.issueDate}, Return Date: ${book.returnDate}, Days Remaining: ${book.daysRemaining})`;
             bookList.appendChild(listItem);
         });
 
@@ -162,11 +163,12 @@ function displayUserLogs() {
 function clearHistory() {
     if (confirm('Are you sure you want to clear the history for all users?')) {
         Object.keys(users).forEach(username => {
-            users[username] = [];
+            delete users[username];
         });
+        saveUsersToLocalStorage();
         displayUserLogs();
     }
 }
 
-// Display user logs on page load
+// Load user logs on page load
 displayUserLogs();

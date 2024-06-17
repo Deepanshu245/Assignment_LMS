@@ -21,21 +21,17 @@
         </div>
         <form id="book-form" style="display:none;">
             <input type="text" id="title" placeholder="Book Title" required>
-            <input type="text" id="author" placeholder="Author" required>
             <input type="date" id="issue-date" required>
             <input type="date" id="return-date" required>
             <button type="submit"><i class="fas fa-plus"></i> Add Book</button>
         </form>
-        <!-- Corrected HTML code -->
         <table id="book-list">
-            <!-- Add an ID to the thead element -->
             <thead id="table-header" style="display: none;">
                 <tr>
                     <th>Title</th>
-                    <th>Author</th>
                     <th>Issue Date</th>
                     <th>Return Date</th>
-                    <th>Days Remaining</th>
+                    <th>Days Left</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -43,7 +39,6 @@
                 <!-- Book items will be displayed here -->
             </tbody>
         </table>
-
         <div id="user-logs">
             <h3>Users and Their Books</h3>
             <div id="user-books-list">
@@ -51,6 +46,8 @@
             </div>
             <button id="clear-history"><i class="fas fa-trash-alt"></i> Clear History</button>
         </div>
+
+        <p class="developer"><b>Developed by Deepanshu ©</b></p>
     </div>
     <script src="scripts.js"></script>
 </body>
